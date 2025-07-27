@@ -37,9 +37,9 @@ class Player():
 
     def main(self):
         run = True
-        
+
         player =pygame.Rect(200, HEIGHT - PLAYER_HEIGHT, PLAYER_WIDTH, PLAYER_HEIGHT )
-        
+
         clock = pygame.time.Clock()
         start_time = time.time()
         elapsed_time = 0
@@ -49,11 +49,11 @@ class Player():
 
         stars = []
         hit = False
-        
+
         while run: # game loop
             star_count += clock.tick(60)
             elapsed_time = time.time() - start_time
-            
+
             if star_count > star_add_increment:
                 for _ in range(3):
                     star_x = random.randint(0, WIDTH - STAR_WIDTH)
@@ -63,19 +63,19 @@ class Player():
 
                 star_add_increment = max(200, star_add_increment - 50)
                 star_count = 0
-                
+
             # when the player presses x on the window
             for event in pygame.event.get():
                 if event.type ==  pygame.QUIT:
                     run = False
                     break
-                
+
             keys = pygame.key.get_pressed()
             if keys[pygame.K_LEFT] and player.x - PLAYER_VEL >= 0: # code for left arrow key
                 player.x -= PLAYER_VEL
             if keys[pygame.K_RIGHT] and player.x + PLAYER_VEL + player.width <= WIDTH: # code for right arrow key
                 player.x += PLAYER_VEL
-            
+
             for star in stars[:]:
                 star.y += STAR_VEL
                 if star.y > HEIGHT:
@@ -93,7 +93,7 @@ class Player():
                 break
 
             self.draw(player, elapsed_time, stars) # call the draw funciton in every single frame
-                
+
         pygame.quit()
 
 if __name__ == "__main__" : # __main__ is python inbuilt irrespective of the file nameewq
